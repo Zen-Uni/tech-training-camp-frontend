@@ -19,10 +19,14 @@ function EditLeft(props) {
     
 
     const handleEdit = e => {
+        // TODO: 通过 redux 存储输入文本
+
         console.log(contentEl.current.innerText)
         if (e.keyCode === 9) {
             e.preventDefault()
 
+
+            // TODO: 写一篇技术博客记录一下
             // 获取光标的range对象 event.view 是一个window对象
             let range = e.view.getSelection().getRangeAt(0);
             // 光标的偏移位置
@@ -48,8 +52,7 @@ function EditLeft(props) {
     }   
 
     return (
-        <EditContent contentEditable="true" className={editFocus ? "content-focus" : ''} onKeyDown={handleEdit} ref={contentEl} id="contentEl">
-            
+        <EditContent contentEditable="true" className={editFocus ? "content-focus" : ''} onKeyDown={handleEdit} ref={contentEl} id="contentEl"> 
         </EditContent>
     )
 }

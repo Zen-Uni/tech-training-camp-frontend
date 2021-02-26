@@ -3,7 +3,7 @@
  * @author Uni
  */
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 // import style components
@@ -19,12 +19,27 @@ import {
 
 // import subcomponents
 import EditLeft from './EditLeft'
+import EditRight from './EditRight'
 
 function Edit() {
 
     const [editFocus, setEditFocus] = useState(false)
+    const [preview, setPreview] = useState(false)
+    const [areaStyle, setAreaStyle] = useState('')
 
+    useEffect(() => {
+        if (preview === false && editFocus === false) {
+            setAreaStyle('')
+        }
 
+        if (preview === true) {
+            setAreaStyle('handle_preview')
+        }
+
+        if (editFocus === true) {
+            setAreaStyle('handle_focus')
+        }
+    }, [preview, editFocus])
 
     return (
         <EditWrapper>
@@ -40,8 +55,9 @@ function Edit() {
             <EditContentWrapper>
 
                 {/* 左侧 */}
-                <ContentLeftWrapper className={ editFocus ? 'handle_focus' : '' }>
+                <ContentLeftWrapper className={ areaStyle }>
 
+                    {/* 编辑组件 */}
                     <EditLeft editFocus={editFocus}/>
 
                     <ContentFooter className="footer-left">
@@ -51,8 +67,11 @@ function Edit() {
 
                 {/* 右侧 */}
                 <ContentRightWrapper>
+
+                    <EditRight preview={preview}/>
+
                     <ContentFooter className="footer-right">
-                        <div className="footer-button footer-button-right">预览模式</div>
+                        <div className="footer-button footer-button-right" onClick={() => setPreview((preview) => !preview)}>预览模式</div>
                     </ContentFooter>
                 </ContentRightWrapper>
 

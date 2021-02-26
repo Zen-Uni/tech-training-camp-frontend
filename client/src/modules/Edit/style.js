@@ -47,6 +47,10 @@ export const ContentLeftWrapper = styled.div`
     &.handle_focus {
         width: 100% !important;
     }
+
+    &.handle_preview {
+        width: 0%;
+    }
 `
 
 // 右侧内容渲染区容器
@@ -111,8 +115,9 @@ export const EditContent = styled.div`
     transition: padding .4s ease;
     &.content-focus {
         padding: 30px 40px;
-        text-align: center;
+        /* text-align: center; */
     }
+
 
 
     &::-webkit-scrollbar {
@@ -127,8 +132,49 @@ export const EditContent = styled.div`
         /* scrollbar-arrow-color:red; */
     }
 
-    &::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    &::-webkit-scrollbar-track {    /*滚动条里面轨道*/
+       
         /* -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2); */
+        border-radius: 0;
+        background: #eee;
+    }
+`
+
+// TODO: 优化，抽离出一个公共的样式组件
+// markdown render components style
+export const EditRender = styled.div`
+    position: absolute;
+    top: 0;
+    bottom: 30px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    outline: none;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    padding: 10px 20px;
+    transition: padding .4s ease;
+    word-wrap: break-word;
+
+
+    &.content-preview {
+        padding: 30px 40px;
+        /* text-align: center; */
+    }
+
+    &::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        width: 7px;
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+        background: rgba(0,0,0,0.1);
+
+    }
+
+    &::-webkit-scrollbar-track {    
         border-radius: 0;
         background: #eee;
     }
