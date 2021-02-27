@@ -3,7 +3,8 @@
  * @author Uni
  */
 
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import { connect } from 'react-redux'
 
 // import style components
 import {
@@ -12,12 +13,34 @@ import {
 
 function EditRight(props) {
 
-    const { preview } = props
+    const { preview, content } = props
+
+    const renderEl = useRef(null)
+
+    useEffect(() => {
+        renderEl.current.innerHTML = content === '' ? null : content.join('')
+    })
 
     return (
-        <EditRender className={preview ? 'content-preview' : ''}>
+        <EditRender className={preview ? 'content-preview' : ''} ref={renderEl}> 
+            {/* {
+                content === '' 
+                ? 
+                null 
+                :  
+                content.map(item => {
+                    return <div>{item}</div>
+                })
+            } */}
         </EditRender>
     )
 }
 
-export default EditRight
+const stateToProps = state => {
+    return {
+        content: state.editContent
+    }
+}
+
+
+export default connect(stateToProps, null)(EditRight)

@@ -4,6 +4,13 @@
  */
 
 import React, { useRef } from 'react'
+import { connect } from 'react-redux'
+
+
+// import action function
+import {
+    editUpdateAction,
+} from '../../store/action'
 
 // import components style
 import {
@@ -12,16 +19,16 @@ import {
 
 function EditLeft(props) {
     
-    const { editFocus } = props
+    const { editFocus, updateEdit } = props
 
     const contentEl = useRef(null)
 
     
 
     const handleEdit = e => {
-        // TODO: 通过 redux 存储输入文本
-
-        console.log(contentEl.current.innerText)
+        const text = contentEl.current.innerText
+        // console.log(contentEl.current.innerText)
+        // console.log(e.keyCode)
         if (e.keyCode === 9) {
             e.preventDefault()
 
@@ -49,15 +56,36 @@ function EditLeft(props) {
             range.setStart(span, 1);
             range.setEnd(span, 1);
         }
+        
+        // console.log(text.split('\n'))
+
+        updateEdit(text)
     }   
 
+    const handleBeforeEdit = e => {
+        if (e.keyCode === 9) {
+            e.preventDefault()
+        }
+    }
+
     return (
-        <EditContent contentEditable="true" className={editFocus ? "content-focus" : ''} onKeyDown={handleEdit} ref={contentEl} id="contentEl"> 
+        <EditContent contentEditable="true" className={editFocus ? "content-focus" : ''} onKeyUp={handleEdit} onKeyDown={handleBeforeEdit}  ref={contentEl} id="contentEl"> 
         </EditContent>
     )
 }
 
-export default EditLeft
+// TODO: 通过 redux 存储输入文本
+const stateToDispatch = dispatch => {
+    return {
+        updateEdit(text) {
+            const action = editUpdateAction(text)
+            dispatch(action)
+        }
+    }
+}
+
+
+export default connect(null, stateToDispatch)(EditLeft)
 
 
 
