@@ -44,6 +44,8 @@ class Particle {
         return titledValue
     }
 
+    
+
 
     // 最后进行每一行的数据整合
     handleLine(value) {
