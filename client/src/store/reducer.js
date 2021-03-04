@@ -5,8 +5,8 @@ import {
 
 
 // import Particle
-import Particle from '../controller/particle'
-
+// import Particle from '../controller/particle'
+import Particle from '../util/Particle'
 
 const defaultState = {
     editContent: ''
