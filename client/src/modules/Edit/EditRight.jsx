@@ -18,7 +18,7 @@ function EditRight(props) {
     const renderEl = useRef(null)
 
     useEffect(() => {
-        renderEl.current.innerHTML = content === '' ? null : content.join('')
+        renderEl.current.innerHTML = content === "" ? null : content
     })
 
     return (

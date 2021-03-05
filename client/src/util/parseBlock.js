@@ -1,11 +1,14 @@
 const heading = /^(#{1,6}\s*)/
 const retrack = /^(\s\s\s\s*)/
 
+
+let count = ''
+
 class parseBlock {
     constructor(line) {
         this.line = line
         this.flag = false
-        this.point = 0
+        // 记录缩进
     }
 
 
@@ -29,25 +32,35 @@ class parseBlock {
 
 
     handleRetract() {
+        count = 'retract'
         return `<div style="background: #ccc">${this.line.slice(3)}`
     }
 
 
     parse() {
+
         if (heading.test(this.line)) {
             return this.handleHeading()
         }
     
         if (retrack.test(this.line)) {
-            console.log('okkkkkk')
             return this.handleRetract()
         }
 
-        // console.log(this.point)
+        // if (quote.test(this.line)) {
+        //     return this.handleQuote()
+        // }
 
         if (this.line === '') {   
-            return "</div>"
+            if (count === 'retract') {
+                count = ''
+                return '</div>'
+            } else {
+                return this.line
+            }
         }
+
+
 
         // if (this.line === '') {
         //     return '</div>'
