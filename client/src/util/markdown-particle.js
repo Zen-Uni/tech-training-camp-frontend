@@ -5,6 +5,8 @@ class Particle {
             isQuote: /^(\>\s+)/,
             isHr: /^(\*{3,}|-{3,})/,
             isCode: /^(```)/,
+            isUnOrderList: /^((\*|-){1}\s+)/,
+            isOrderList: /^(\d{1}.\s+)/,
         }
         this.lines = text.split('\n')
         const tokens = this.parse()
@@ -18,6 +20,13 @@ class Particle {
 
         while (this.judgeCycle(cur)) {
             let line = this.lines[cur]
+
+            if (line === "") {
+                tokens.push("<br/>")
+                cur ++
+                continue
+            }
+
 
             if (this.rules.isHeading.test(line)) {
                 let count = 0
@@ -79,11 +88,46 @@ class Particle {
                 continue
             }
 
+            if (this.rules.isUnOrderList.test(line)) {
+                let temp = `<li>${line.slice(2)}</li>`
+                let nextLine = this.lines[cur + 1]
+                while (this.rules.isUnOrderList.test(nextLine)) {
+                    temp += (`<li>${nextLine.slice(2)}</li>\n`)
+                    cur ++
+                    nextLine = this.lines[cur + 1]
+                }
+                temp = `<ul>${temp}</ul>\n`
+                tokens.push(temp)
+                cur ++
+                continue
+            }
+
+            if (this.rules.isOrderList.test(line)) {
+                let temp = `<li>${line.replace(this.rules.isOrderList, "")}</li>`
+                let nextLine = this.lines[cur + 1]
+                while (this.rules.isOrderList.test(nextLine)) {
+                    temp += (`<li>${nextLine.replace(this.rules.isOrderList, "")}</li>\n`)
+                    cur ++
+                    nextLine = this.lines[cur + 1]
+                }
+
+                temp = `<ol>${temp}</ol>`
+                tokens.push(temp)
+                cur ++
+                continue
+            }
+
+
             tokens.push(`<p>${line}</p>`)
             cur ++
         }
 
         return tokens
+    }
+
+    // TODO: 行内解析
+    parseInline(line) {
+        
     }
 
     judgeCycle(cur) {
