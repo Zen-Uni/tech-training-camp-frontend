@@ -7,7 +7,7 @@ import NotFound from './modules/NotFound'
 
 import { Redirect } from 'react-router-dom'  
 
-const auth = true
+const auth = false
 
 const routes = [
     {
