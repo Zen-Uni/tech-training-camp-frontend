@@ -48,13 +48,14 @@ const Login = (props) => {
         } = await login(values)
         
        if (code === 0) {
-           message.success(msg, 1)
-           .then(() => {
-               history.replace('/article')
-           })
+        //    message.success(msg, 1)
+        //    .then(() => {
+        //        history.replace('/article')
+        //    })
            storeToken(data.token)
            configReq()
            handleLogin(data.username)
+           history.replace('/')
        } else {
            message.error(msg)
        }

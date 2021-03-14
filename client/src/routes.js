@@ -7,40 +7,30 @@ import NotFound from './modules/NotFound'
 
 import { Redirect } from 'react-router-dom'  
 
-const auth = false
+
 
 const routes = [
     {
         path: '/',
         exact: true,
-        render: () => (
-            auth ? <Redirect to='/edit'/> : <Redirect to='/sign'/>
-        )
+        component: Article
     },
     {
         path: '/edit',
         exact: true,
-        render: () => (
-            auth ? <Edit/> : <Redirect to='/sign' />
-        )
+        component: Edit
     },
     {
         path: '/sign',
         exact: true,
-        render: () => (
-            auth ? <Redirect to='/edit' /> : <LoginAndRegister/>
-        )
+        component: LoginAndRegister
     },
     {
         path: '/home',
         exact: true,
         component: Home
     },
-    {
-        path: '/article',
-        exact: true,
-        component: Article
-    }, 
+   
     {
         path: '*',
         component: NotFound

@@ -19,23 +19,38 @@ import Login from './Login'
 import Register from './Register'
 import { useHistory } from 'react-router'
 import {
-    testToken
+    checkToken
 } from '../../service'
+import { connect } from 'react-redux'
+import { updateUserConfig } from '../../store/action'
+import { message } from 'antd'
 
-function LoginAndRegister() {
+function LoginAndRegister(props) {
+
+    const { storeUsername } = props
 
     const history = useHistory()
 
-    useEffect(() => {   
+    useEffect(() => {        
         configReq()
+        
         async function fetchData() {
-            const res = await testToken()
-            console.log(res)
+            const {
+                code,
+                data,
+                msg
+            } = await checkToken()
+            if (code === 0) {
+                storeUsername(data.username)
+                history.replace('/')
+            }
         }
 
         fetchData()
-        console.log(1)
-        // console.log(res)
+
+        return () => {
+            message.success('已登录')
+        }
     }, [])
 
     const [login, setLogin] = useState(true)
@@ -56,4 +71,13 @@ function LoginAndRegister() {
     )
 }
 
-export default LoginAndRegister
+const stateToDispatch = dispatch => {
+    return {
+        storeUsername(username){
+            const action = updateUserConfig(username)
+            dispatch(action)
+        }
+    }
+}
+
+export default connect(null, stateToDispatch)(LoginAndRegister)
