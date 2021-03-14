@@ -7,6 +7,11 @@ class Particle {
             isCode: /^(```)/,
             isUnOrderList: /^((\*|-){1}\s+)/,
             isOrderList: /^(\d{1}.\s+)/,
+            isCodeWord: /\`{1}(.*?)\`{1}/g,
+            isImage: /\!\[(.*?)\]\((.*?)\)/g,
+            isStrong: /\*{2}(.*?)\*{2}/g,
+            isLink: /\[(.*?)\]\((.*?)\)/g,
+            isEm: /\*{1}(.*?)\*{1}/g
         }
         this.lines = text.split('\n')
         const tokens = this.parse()
@@ -117,7 +122,7 @@ class Particle {
                 continue
             }
 
-
+            line = this.parseInline(line)
             tokens.push(`<p>${line}</p>`)
             cur ++
         }
@@ -127,7 +132,37 @@ class Particle {
 
     // TODO: 行内解析
     parseInline(line) {
-        
+        if (this.rules.isCodeWord.test(line)) {
+            line = line.replace(this.rules.isCodeWord, (res, str) => {
+                return `<code style="background: grey">${str}</code>`
+            })
+        }
+
+        if (this.rules.isImage.test(line)) {
+            line = line.replace(this.rules.isImage, (res, str1, str2) => {
+                return `<div><img src=${str2} alt=${str1}></div>`;
+            })
+        }
+
+        if (this.rules.isStrong.test(line)) {
+            line = line.replace(this.rules.isStrong, (res, str) => {
+                return `<b>${str}</b>`
+            })
+        }
+
+        if (this.rules.isLink.test(line)) {
+            line = line.replace(this.rules.isLink, (res, str1, str2) => {
+                return `<a href=${str2}>${str1}</a>`
+            })
+        }
+
+        if (this.rules.isEm.test(line)) {
+            line = line.replace(this.rules.isEm, (res, str) => {
+                return `<em>${str}</em>`
+            })
+        }
+
+        return line
     }
 
     judgeCycle(cur) {
