@@ -33,6 +33,18 @@ const checkUser = async ({email, password}) => {
     })
 }
 
+const getUser = async ({email}) => {
+    return new Promise((resolve, reject) => {
+        const exist = User.find({
+            email
+        })
+
+        exist.exec((err, data) => {
+            resolve(data[0].username)
+        })
+    })
+}
+
 
 const loginController = async (payload) => {
 
@@ -40,7 +52,8 @@ const loginController = async (payload) => {
 
     if (res) {
         const token = await dispatchToken(payload.email)
-        return new SuccessModel({ token }, "登录成功！")
+        const username = await getUser(payload)
+        return new SuccessModel({ token, username}, "登录成功！")
     } else {
         return new ErrorModel('用户邮箱或密码错误')
     }

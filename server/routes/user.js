@@ -6,6 +6,13 @@ const emailVerify = require('../controller/handleCaptcha')
 const registerController = require('../controller/register')
 const loginController = require('../controller/login')
 
+const {
+  User,
+  Captcha
+} = require('../db')
+
+const checkLogin = require('../controller/checkLogin')
+
 router.prefix('/api/user')
 
 
@@ -40,5 +47,28 @@ router.post('/login', async (ctx, next) => {
     console.log('ok')
     ctx.body = res
   })
+
+
+
+// dev api
+router.get('/empty', async (ctx, next) => {
+  await User.remove(err => {
+    if (err)  console.log('remove user error:', err)
+    else  console.log('remove success')
+  })
+})
+
+router.get('/captchanull', async (ctx, next) => {
+  await Captcha.remove(err => {
+    if (err)  console.log('remove captcha error:', err)
+    else  console.log('remove success')
+  })
+})
+
+router.get('/token', async (ctx, next) => {
+  const token = ctx.headers.authorization
+  ctx.body = await checkLogin(token)
+})
+
 
 module.exports = router

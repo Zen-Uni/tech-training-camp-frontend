@@ -81,7 +81,7 @@ const registerController = async (payload) => {
             return new ErrorModel('验证码错误！')
         }
     } catch (err) {
-        console.log(err)
+        return new ErrorModel('注册失败，未知错误，请联系管理员')
     }
 }
 

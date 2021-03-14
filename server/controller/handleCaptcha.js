@@ -95,6 +95,7 @@ const saveCaptcha = async (email, captcha) => {
                             console.log('save captcha error --- ', err)
                             reject(err)
                         } 
+                        
                     })
                 }
 
@@ -102,7 +103,7 @@ const saveCaptcha = async (email, captcha) => {
                 mailTransport.sendMail(options, err => {
                     if (err) {
                         console.log('transport email error --- ', err)
-                        reject(err)
+                        reject('邮箱发送失败，请检查格式')
                     } else {
                         resolve(new SuccessModel('邮箱发送成功！'))
                     }
@@ -124,11 +125,13 @@ const emailVerify = async (email) => {
         try {
             return await saveCaptcha(email, captcha)
         } catch (err) {
-            console.log(err)
+            return new ErrorModel(err)
         }
 
     } catch (err) {
         console.log(err)
+        return new ErrorModel(err)
+
     }
     
 }

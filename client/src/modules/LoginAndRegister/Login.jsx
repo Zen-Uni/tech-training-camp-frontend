@@ -6,21 +6,58 @@
 // TODO: 测试登录注册，优化逻辑
 
 import React, {  } from 'react'
+import { connect } from 'react-redux'
 import { Form, Input, Button, Checkbox, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+
+// import action
+import {
+    updateUserConfig
+} from '../../store/action'
+
 // import style
 import {
     loginLayout,
     loginButtonLayout
 } from './style'
 
+
+// import service interface
+import { login } from '../../service'
+
+
+// import util
+import {
+    configReq,
+    storeToken,
+} from '../../util/token'
+
+
 const Login = (props) => {
 
-    const { handleChange } = props
+    const { handleChange, handleLogin } = props
+
+    const history = useHistory()
 
     const onFinish = async (values) => {
-        console.log(values)
+        const {
+            code, 
+            msg, 
+            data,
+        } = await login(values)
+        
+       if (code === 0) {
+           message.success(msg, 1)
+           .then(() => {
+               history.replace('/article')
+           })
+           storeToken(data.token)
+           configReq()
+           handleLogin(data.username)
+       } else {
+           message.error(msg)
+       }
     };
 
     return (
@@ -76,6 +113,15 @@ const Login = (props) => {
     );
 };
 
+const stateToDispatch = dispatch => {
+    return {
+        handleLogin(username) {
+            const action = updateUserConfig(username)
+            dispatch(action)
+        }
+    }
+}
 
-export default Login
+
+export default connect(null, stateToDispatch)(Login)
 

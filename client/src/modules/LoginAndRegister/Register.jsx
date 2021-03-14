@@ -15,19 +15,39 @@ import {
 } from './style'
 
 
+// import fetch
+import {
+    captcha,
+    register
+} from '../../service'
+
  
  
 const Register = (props) => {
 
     const { handleChange } = props
 
-    const onFinish = async(values) => {
+    const [form] = Form.useForm()
 
+    const onFinish = async(values) => {
+        const res = await register(values)
+        if (res.code === 0) {
+            message.success(res.msg)
+        } else {
+            message.error(res.msg)
+        }
     };
 
 
     const getCaptcha = async () => {
-
+        const email = form.getFieldValue('email')
+        const res = await captcha({email})
+        console.log(res)
+        if (res.code === 0) {
+            message.success(res.msg)
+        } else {
+            message.error(res.msg)
+        }
     }
 
     return (
@@ -39,6 +59,7 @@ const Register = (props) => {
         }}
         onFinish={onFinish}
         style={loginLayout}
+        form={form}
         >
         <Form.Item
             name="username"
@@ -84,7 +105,7 @@ const Register = (props) => {
                 },
             ]}
         >
-            <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
+            <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email"  />
         </Form.Item>
         <Form.Item label="验证码" extra="We must make sure that your are a human.">
             <Row gutter={8}>
