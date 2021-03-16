@@ -10,7 +10,8 @@ class Tool {
         this.strong = this.strong.bind(this)
         this.code = this.code.bind(this)
         this.codeBlock = this.codeBlock.bind(this)
-
+        this.link = this.link.bind(this)
+        this.pic = this.pic.bind(this)
     }
 
     handleSite(e) {
@@ -53,7 +54,7 @@ class Tool {
     }
 
     em(e) {
-        const html = "**"
+        const html = "*斜体*"
         this.handleAdd(e, html)
     }
 
@@ -63,17 +64,27 @@ class Tool {
     }
 
     strong(e) {
-        const html = "****"
+        const html = "**粗体**"
         this.handleAdd(e, html)
     }
 
     code(e) {
-        const html = "``"
+        const html = "`代码`"
         this.handleAdd(e, html)
     }
 
     codeBlock(e) {
         const html = "```<br/>```"
+        this.handleAdd(e, html)
+    }
+
+    link(e) {
+        const html = "[]()"
+        this.handleAdd(e, html)
+    } 
+
+    pic(e) {
+        const html = "![]()"
         this.handleAdd(e, html)
     }
 }
@@ -106,6 +117,14 @@ const toolBarConfig = [
     {
         icon: "icon-kuohaobrackets",
         fn: "codeBlock"
+    },
+    {
+        icon: "icon-link-fill",
+        fn: "link"
+    },
+    {
+        icon: "icon-tupian",
+        fn: "pic"
     }
 ]
 

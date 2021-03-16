@@ -63,7 +63,7 @@ class Particle {
                             break
                         }
                     }
-                    tokens.push(`<blockquote style="background: #ccc">${temp}</blockquote>`)
+                    tokens.push(`<blockquote>${temp}</blockquote>`)
                     cur ++
                     continue
                 }
@@ -87,7 +87,7 @@ class Particle {
                     cur ++
                     nextLine = this.lines[cur + 1]
                 }
-                temp = `<div  style='background: #777'>${temp}</code></pre></div>`
+                temp = `<div class="code-block">${temp}</code></pre></div>`
                 tokens.push(temp)
                 cur += 2
                 continue
@@ -134,7 +134,7 @@ class Particle {
     parseInline(line) {
         if (this.rules.isCodeWord.test(line)) {
             line = line.replace(this.rules.isCodeWord, (res, str) => {
-                return `<code style="background: grey">${str}</code>`
+                return `<code class="code">${str}</code>`
             })
         }
 

@@ -71,10 +71,14 @@ export const EditToolWrapper = styled.div`
     position: relative;
     height: 40px;
     width: 100%;
-    background-color: yellow;
+    background-color: #f8f8f8;
     display: flex;
     align-items: center;
-    
+    border-bottom: 1px solid #ccc;
+    & .iconfont {
+        margin: 0px 20px;
+        cursor: pointer;
+    }
 `
 
 export const EditContentWrapper = styled.div`
@@ -167,7 +171,7 @@ export const EditContent = styled.div`
     padding: 10px 20px;
     transition: padding .4s ease;
     &.content-focus {
-        padding: 30px 40px;
+        padding: 30px 150px;
         /* text-align: center; */
     }
 
@@ -211,7 +215,7 @@ export const EditRender = styled.div`
 
 
     &.content-preview {
-        padding: 30px 40px;
+        padding: 30px 150px;
         /* text-align: center; */
     }
 
@@ -231,4 +235,37 @@ export const EditRender = styled.div`
         border-radius: 0;
         background: #eee;
     }
+
+    & blockquote {
+        background-color: #f3f3f3;
+        border-radius: 5px;
+        box-sizing: border-box;
+        padding: 20px 0px 15px 30px;
+        display: block;
+    }
+
+    & hr {
+        width: 100%;
+        height: 2px;
+        background-color: #f4f4f4;
+        border: none;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    & .code {
+        background-color: yellow;
+    }
+
+    & .code-block {
+        background-color: rgba(0,0,0,0.8);
+        margin: auto;
+        width: 80%;
+        line-height: 40px;
+        padding: 20px 20px 10px 20px;
+        border-radius: 5px;
+        font-family: "STHeiti";
+        color: white;
+    }
+
 `
