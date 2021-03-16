@@ -17,3 +17,4 @@ export const updateUserConfig = username => {
         username
     }
 }
+

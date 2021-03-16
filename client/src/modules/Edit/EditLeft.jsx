@@ -19,7 +19,7 @@ import {
 
 function EditLeft(props) {
     
-    const { editFocus, updateEdit } = props
+    const { editFocus, updateEdit, editContent } = props
 
     const contentEl = useRef(null)
 
@@ -60,7 +60,7 @@ function EditLeft(props) {
         }
         
         // console.log(text.split('\n'))
-
+        editContent(text)
         updateEdit(text)
     }   
 

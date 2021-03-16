@@ -1,27 +1,80 @@
 import styled from 'styled-components'
-
+import avatar from '../../static/avatar.jpg'
+console.log(avatar)
 export const EditWrapper = styled.div`
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: black;
+    /* background-color: black; */
     overflow: hidden;
     box-sizing: border-box;
     min-width: 1000px;
 `
-
+// Header 组件样式
 export const EditHeaderWrapper = styled.div`
     position: relative;
     height: 60px;
     width: 100%;
-    background-color: pink;
+    /* background-color: pink; */
+    display: flex;
+    align-items: center;
 `
 
+export const HeaderInputWrapper = styled.div`
+    height: 50px;
+    width: 500px;
+    /* background-color: yellow; */
+    position: absolute;
+    left: 50px;
+    /* border-bottom: 2px solid #ccc; */
+
+    & input {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        border: none;
+        outline: none;
+        font-size: 30px;
+        &::placeholder {
+            color: #ccc;
+        }
+    }
+`
+export const HeaderConfigWrapper = styled.div`
+    height: 50px;
+    width: 150px;
+    position: absolute;
+    right : 50px;
+    /* background-color: pink; */
+    display: flex;
+    align-items: center;
+    & .post-button {
+        height: 40px;
+        border-radius: 5px;
+    }
+
+    & .avatar {
+        position: absolute;
+        right: 0px;
+        height: 40px;
+        width: 40px;
+        border-radius: 20px;
+        background-position: center center;
+        background-repeat: none;
+        background-image: url(${avatar});
+        background-size: cover;
+    }
+`
+
+// 快捷工具栏组件
 export const EditToolWrapper = styled.div`
     position: relative;
     height: 40px;
     width: 100%;
     background-color: yellow;
+    display: flex;
+    align-items: center;
+    
 `
 
 export const EditContentWrapper = styled.div`

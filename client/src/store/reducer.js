@@ -12,13 +12,15 @@ import Particle from '../util/markdown-particle'
 
 const defaultState = {
     editContent: '',
-    username: ''
+    username: '',
+    
 }
 
 const reducer = (state = defaultState, action) => {
 
     if (action.type === EDIT_UPDATE) {
         const newState = JSON.parse(JSON.stringify(state))
+       
         const renderValue = new Particle(action.text)
         newState.editContent = renderValue.htmlContent
         return newState
