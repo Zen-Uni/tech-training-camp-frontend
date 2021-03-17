@@ -15,6 +15,8 @@ const {
 const checkLogin = require('../controller/checkLogin')
 const { parseJWT } = require('../middleware/jwt')
 const postArticle = require('../controller/postArticle')
+const getArticle = require('../controller/getArticle')
+const getArticleDetail = require('../controller/getArticleDetail')
 
 router.prefix('/api/user')
 
@@ -70,6 +72,18 @@ router.post('/post-article', async (ctx, next) => {
   }
   
   ctx.body = await postArticle(payload)
+})
+
+router.get('/article-list', async (ctx, next) => {
+  const res = await getArticle()
+  
+  ctx.body = res
+})
+
+router.post('/article-detail', async (ctx, next) => {
+  const {id} = ctx.request.body
+  const res = await getArticleDetail(id)
+  ctx.body = res
 })
 
 // dev api

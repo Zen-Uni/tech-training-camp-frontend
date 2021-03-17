@@ -28,3 +28,13 @@ export async function postArticle(payload) {
     const res = await axios('post', '/user/post-article', payload)
     return res
 }
+
+export async function getArticle() {
+    const res = await axios('get', '/user/article-list')
+    return res
+}
+
+export async function getDetails(id) {
+    const res = await axios('post', '/user/article-detail', {id})
+    return res
+}

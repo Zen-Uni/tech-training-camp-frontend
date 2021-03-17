@@ -17,6 +17,7 @@ export const getToken = () => {
 
 export const configReq = () => {
     const token = getToken()
+    console.log(token)
     if (token) {
         axios.interceptors.request.use(config => {
             config.headers.Authorization = `Bearer ${token}`
@@ -24,4 +25,8 @@ export const configReq = () => {
         })
         
     } 
+}
+
+export const removeToken = () => {
+    return window.localStorage.removeItem(site)
 }

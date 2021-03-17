@@ -24,7 +24,7 @@
  })
 
 // TODO:设定文章模型
- let cut = 0
+ let cut = 1
  const articleSchema = mongoose.Schema({
     id: {
         type: Number,

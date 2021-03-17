@@ -112,6 +112,11 @@ function Edit(props) {
     const handlePostArticle = async () => {
         const title = titleEl.current.value
         const content = document.getElementById('contentEl').innerText
+        console.log(content)
+        if (!title && !content) {
+            return message.warning("请填写标题或内容")
+        }
+
         const username = User
         const payload = {
             title,
@@ -119,8 +124,15 @@ function Edit(props) {
             content,
             share
         }
-        const res = await postArticle(payload)
-        console.log(res)
+        
+        const { code, msg } = await postArticle(payload)
+        if (code === 0) {
+            message.success(msg, .5, () => {
+                history.replace('/')
+            })
+        } else {
+            message.warning(msg)
+        }
     }
 
     return (

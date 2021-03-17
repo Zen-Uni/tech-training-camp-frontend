@@ -26,7 +26,7 @@ const routes = [
         component: LoginAndRegister
     },
     {
-        path: '/home',
+        path: '/article/:id',
         exact: true,
         component: Home
     },

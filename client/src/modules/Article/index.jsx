@@ -28,8 +28,8 @@ function Article(props) {
         configReq()
         async function fetchData() {
             const { code, data } = await checkToken()
-            const username = data.username
             if (code === 0) {
+                const username = data.username
                 console.log(username)
                 storeUser(username)
                 setAuth(true)
@@ -39,7 +39,7 @@ function Article(props) {
         }
 
         fetchData()
-    }, [])
+    }, [auth])
 
     return (
         <Container>
@@ -48,7 +48,7 @@ function Article(props) {
                 <div className="button-line" id="button-middle"></div>
                 <div className="button-line" id="button-bottom"></div>
             </LeftButton>
-            <Left slide={slide} auth={auth}/>
+            <Left slide={slide} auth={auth} setAuth={setAuth}/>
             <Right/>
         </Container>
     )
