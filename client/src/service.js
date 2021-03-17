@@ -38,3 +38,8 @@ export async function getDetails(id) {
     const res = await axios('post', '/user/article-detail', {id})
     return res
 }
+
+export async function upDateArticle(payload) {
+    const res = await axios('post', '/user/article-update', payload)
+    return res
+}

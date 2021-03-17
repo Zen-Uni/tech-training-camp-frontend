@@ -3,9 +3,10 @@ import LoginAndRegister from './modules/LoginAndRegister'
 import Home from './modules/Home'
 import Article from './modules/Article'
 import NotFound from './modules/NotFound'
+import Cooperation from './modules/Cooperation'
 
 
-import { Redirect } from 'react-router-dom'  
+ 
 
 
 
@@ -30,7 +31,11 @@ const routes = [
         exact: true,
         component: Home
     },
-   
+    {
+        path: '/cooperation/:id',
+        exact: true,
+        component: Cooperation
+    },
     {
         path: '*',
         component: NotFound

@@ -17,6 +17,7 @@ const { parseJWT } = require('../middleware/jwt')
 const postArticle = require('../controller/postArticle')
 const getArticle = require('../controller/getArticle')
 const getArticleDetail = require('../controller/getArticleDetail')
+const upDateArticle = require('../controller/updateArticle')
 
 router.prefix('/api/user')
 
@@ -85,6 +86,13 @@ router.post('/article-detail', async (ctx, next) => {
   const res = await getArticleDetail(id)
   ctx.body = res
 })
+
+router.post('/article-update', async (ctx, next) => {
+  const { id, content } = ctx.request.body
+  const res = await upDateArticle({id, content})
+  ctx.body = res
+})
+
 
 // dev api
 router.get('/empty', async (ctx, next) => {

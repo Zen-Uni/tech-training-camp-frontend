@@ -5,15 +5,16 @@ import {
 } from './actionConstant'
 
 
-// import Particle
-// import Particle from '../controller/particle'
-// import Particle from '../util/Particle'
+
+
+
 import Particle from '../util/markdown-particle'
 
 const defaultState = {
     editContent: '',
     username: '',
 }
+
 
 const reducer = (state = defaultState, action) => {
 
