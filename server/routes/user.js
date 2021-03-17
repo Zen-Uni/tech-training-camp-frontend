@@ -8,11 +8,13 @@ const loginController = require('../controller/login')
 
 const {
   User,
-  Captcha
+  Captcha,
+  Article,
 } = require('../db')
 
 const checkLogin = require('../controller/checkLogin')
 const { parseJWT } = require('../middleware/jwt')
+const postArticle = require('../controller/postArticle')
 
 router.prefix('/api/user')
 
@@ -66,8 +68,8 @@ router.post('/post-article', async (ctx, next) => {
     share,
     email,
   }
-
-  ctx.body = payload
+  
+  ctx.body = await postArticle(payload)
 })
 
 // dev api
@@ -85,6 +87,12 @@ router.get('/captchanull', async (ctx, next) => {
   })
 })
 
+router.get('/empty-article', async (ctx, next) => {
+  await Article.remove(err => {
+    if (err) console.log('remove article errror:', err)
+    else console.log('remove success')
+  })
+})
 
 
 
