@@ -1,9 +1,6 @@
 
 import axios from 'axios'
-import {
-    SuccessModel,
-    ErrorModel
-} from './message'
+
 
 const site = "BYTEDANCE_LCH"
 

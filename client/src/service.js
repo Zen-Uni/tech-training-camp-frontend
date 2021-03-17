@@ -1,6 +1,6 @@
 import fetch from './util/fetch'
 
-const rootPath = 'http://127.0.0.1:4000/api'
+const rootPath = 'http://60.205.230.224:4000/api'
 const axios = fetch(rootPath)
 
 export async function login(data) {
