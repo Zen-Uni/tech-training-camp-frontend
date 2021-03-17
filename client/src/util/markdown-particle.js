@@ -171,8 +171,8 @@ class Particle {
     }
 
     tokensToHTML(tokens) {
-        console.log("tokens --------", tokens)
-        console.log('html ----', typeof tokens.join(''))
+        // console.log("tokens --------", tokens)
+        // console.log('html ----', typeof tokens.join(''))
         return tokens.join('')
     }
 

@@ -23,3 +23,8 @@ export async function checkToken() {
     const res = await axios('get', '/user/token')
     return res
 }
+
+export async function postArticle(payload) {
+    const res = await axios('post', '/user/post-article', payload)
+    return res
+}

@@ -12,6 +12,7 @@ const {
 } = require('../db')
 
 const checkLogin = require('../controller/checkLogin')
+const { parseJWT } = require('../middleware/jwt')
 
 router.prefix('/api/user')
 
@@ -48,7 +49,26 @@ router.post('/login', async (ctx, next) => {
     ctx.body = res
   })
 
+router.get('/token', async (ctx, next) => {
+  const token = ctx.headers.authorization
+  ctx.body = await checkLogin(token)
+})
 
+router.post('/post-article', async (ctx, next) => {
+  const token = ctx.headers.authorization
+  const { username, title, content, share } = ctx.request.body
+  const { data } = parseJWT(token)
+  const email = data.username
+  const payload = {
+    username,
+    title,
+    content,
+    share,
+    email,
+  }
+
+  ctx.body = payload
+})
 
 // dev api
 router.get('/empty', async (ctx, next) => {
@@ -65,10 +85,7 @@ router.get('/captchanull', async (ctx, next) => {
   })
 })
 
-router.get('/token', async (ctx, next) => {
-  const token = ctx.headers.authorization
-  ctx.body = await checkLogin(token)
-})
+
 
 
 module.exports = router

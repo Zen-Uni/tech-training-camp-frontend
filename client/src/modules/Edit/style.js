@@ -22,7 +22,7 @@ export const EditHeaderWrapper = styled.div`
 
 export const HeaderInputWrapper = styled.div`
     height: 50px;
-    width: 500px;
+    width: 470px;
     /* background-color: yellow; */
     position: absolute;
     left: 50px;
@@ -42,15 +42,27 @@ export const HeaderInputWrapper = styled.div`
 `
 export const HeaderConfigWrapper = styled.div`
     height: 50px;
-    width: 150px;
+    width: 470px;
     position: absolute;
     right : 50px;
     /* background-color: pink; */
     display: flex;
     align-items: center;
-    & .post-button {
+
+    & .back-button {
+        position: absolute;
+        right: 150px;
         height: 40px;
         border-radius: 5px;
+        margin: 0px 20px;
+    }
+
+    & .post-button {
+        position: absolute;
+        height: 40px;
+        border-radius: 5px;
+        margin: 0px 10px;
+        right: 50px;
     }
 
     & .avatar {
@@ -65,6 +77,67 @@ export const HeaderConfigWrapper = styled.div`
         background-size: cover;
     }
 `
+
+export const ShareButtonWrapper = styled.div`
+    position: absolute;
+    right: 270px;
+    height: 40px;
+    width: 150px;
+    /* background-color: pink; */
+    display: flex;
+    align-items: center;
+    
+
+    & .button-label {
+        font-weight: 600;
+        margin: 0px 10px;
+    }
+
+    & .button-background {
+        position: relative;
+        height: 25px;
+        width: 50px;
+        border-radius: 12.5px;
+        border: 1px solid #ccc;
+        
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: all .4s ease;
+    }
+
+    & .button-background_unshare {
+        background-color: white;
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, .7);
+    }
+
+    & .button-background_share {
+        background-color: #FFA119;
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, .7);
+    }
+
+    & .button-ball {
+        position: absolute;
+        height: 28px;
+        width: 28px;
+        border: 1px solid #ccc;
+        box-shadow: 3px 0px 3px rgba(0, 0, 0, .1);
+        border-radius: 14px;
+        background-color: white;
+        transition: all .4s ease;
+    }
+
+    & .button-ball_unshare {
+        left: -2px;   
+    }
+
+    & .button-ball_share {
+        left: 27px;   
+    }
+`
+
+
+
 
 // 快捷工具栏组件
 export const EditToolWrapper = styled.div`

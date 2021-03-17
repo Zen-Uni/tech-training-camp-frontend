@@ -3,7 +3,7 @@
  * @author Uni
  */
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import {
     editUpdateAction,
@@ -11,7 +11,7 @@ import {
 
 
 import {
-    Button
+    Button, message
 } from 'antd'
 
 // import style components
@@ -30,23 +30,47 @@ import {
 // import subcomponents
 import EditLeft from './EditLeft'
 import EditRight from './EditRight'
+import ShareButton from './ShareButton'
 
 
 // import toolbar config
 import { toolBarConfig, Tool} from '../../util/tool-bar'
 import { connect } from 'react-redux'
+import { configReq } from '../../util/token'
+import { checkToken, postArticle } from '../../service'
+import { useHistory } from 'react-router'
 
 
 function Edit(props) {
+    const history = useHistory()
+    useEffect(() => {
+        configReq()
 
-    const { update } = props
+        async function fetchData() {
+            const {
+                code,
+                msg
+            } = await checkToken()
+            // console.log(code)
+            if (code === 1) {
+                message.warning(msg, 1, () => {
+                    history.replace('/')
+                })
+            }
+        }
+
+        fetchData()
+    }, [])
+
+    const { update, User } = props
 
     const [editFocus, setEditFocus] = useState(false)
     const [preview, setPreview] = useState(false)
     const [areaStyle, setAreaStyle] = useState('')
     const [editContent, setEditContent] = useState('')
     const [tool, setTool] = useState(new Tool(editContent))
-    
+    const [share, setShare] = useState(false)
+    const titleEl = useRef(null)
 
     useEffect(() => {
         if (preview === false && editFocus === false) {
@@ -76,15 +100,40 @@ function Edit(props) {
         update(input.innerHTML)
     }
 
+    const handleBackArticle = () => {
+        history.replace('/')
+    }
+
+    const handleShare = () => {
+        setShare((share) => !share)
+    }
+
+
+    const handlePostArticle = async () => {
+        const title = titleEl.current.value
+        const content = document.getElementById('contentEl').innerText
+        const username = User
+        const payload = {
+            title,
+            username, 
+            content,
+            share
+        }
+        const res = await postArticle(payload)
+        console.log(res)
+    }
+
     return (
         <EditWrapper>
             {/* 顶部组件，挂载文章标题组件、头像组件、发布按钮组件 */}
             <EditHeaderWrapper>
                 <HeaderInputWrapper>
-                    <input type="text" placeholder="输入文章标题"/>
+                    <input type="text" placeholder="输入文章标题" ref={titleEl}/>
                 </HeaderInputWrapper>
                 <HeaderConfigWrapper>
-                    <Button type="primary" className="post-button">发布文章</Button>
+                    <ShareButton handleShare={handleShare} share={share}/>
+                    <Button className="back-button" onClick={handleBackArticle}>返回主页</Button>
+                    <Button type="primary" className="post-button" onClick={handlePostArticle}>发布文章</Button>
                     <div className="avatar"></div>
                 </HeaderConfigWrapper>
             </EditHeaderWrapper>
@@ -129,6 +178,12 @@ function Edit(props) {
 }
 
 
+const stateToProps = state => {
+    return {
+        User: state.username
+    }
+}
+
 const stateToDispatch = dispatch => {
     return {
         update(text) {
@@ -138,4 +193,4 @@ const stateToDispatch = dispatch => {
     }
 }
 
-export default connect(null, stateToDispatch)(Edit)
+export default connect(stateToProps, stateToDispatch)(Edit)

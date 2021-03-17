@@ -66,6 +66,8 @@ const saveUser = async ({email, password, username}) => {
     })
 }
 
+
+
 const registerController = async (payload) => {
   
     try {
@@ -74,8 +76,8 @@ const registerController = async (payload) => {
             const res = await saveUser(payload)
             if (res) {
                 const token = await dispatchToken(payload.email)
-                console.log(token)
-                return new SuccessModel({ token }, '注册成功！')
+                const username = payload.username
+                return new SuccessModel({ token, username }, '注册成功！')
             }
         } else {
             return new ErrorModel('验证码错误！')

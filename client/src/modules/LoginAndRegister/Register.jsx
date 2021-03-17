@@ -3,11 +3,11 @@
  * @author Uni
  */
 
-import React, { useRef } from 'react'
+import React from 'react'
 
 import { Form, Input, Button, Row, Col, message } from 'antd'
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 // import style
 import {
     loginLayout,
@@ -20,21 +20,31 @@ import {
     captcha,
     register
 } from '../../service'
+import { connect } from 'react-redux'
+import { configReq, storeToken } from '../../util/token'
 
- 
+import {
+    updateUserConfig
+} from '../../store/action'
+
  
 const Register = (props) => {
 
-    const { handleChange } = props
+    const { handleChange, handleLogin } = props
+
+    const history = useHistory()
 
     const [form] = Form.useForm()
 
     const onFinish = async(values) => {
-        const res = await register(values)
-        if (res.code === 0) {
-            message.success(res.msg)
+        const  { code, data, msg }= await register(values)
+        if (code === 0) {
+            storeToken(data.token)
+            configReq()
+            handleLogin(data.username)
+            history.replace('/')
         } else {
-            message.error(res.msg)
+            message.error(msg)
         }
     };
 
@@ -141,4 +151,13 @@ const Register = (props) => {
 };
 
 
-export default Register
+const stateToDispatch = dispatch => {
+    return {
+        handleLogin(username) {
+            const action = updateUserConfig(username)
+            dispatch(action)
+        }
+    }
+}
+
+export default connect(null, stateToDispatch)(Register)
