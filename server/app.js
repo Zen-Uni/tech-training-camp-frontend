@@ -16,6 +16,7 @@ const { SECRET, jwtRightVerify } = require('./middleware/jwt')
 // const index = require('./routes/index')
 // const users = require('./routes/users')
 const user = require('./routes/user')
+const img = require('./routes/img')
 
 // error handler
 onerror(app)
@@ -26,7 +27,7 @@ app.use(jwtRightVerify)
 app.use(jwt({
   secret: SECRET,
 }).unless({
-  path: [/^\/api\/user\//]
+  path: [/^\/api\/user\//, /^\/avatar\//]
 })
 )
 
@@ -45,7 +46,7 @@ app.use(bodyparser({
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
-
+app.use(require('koa-static')(__dirname + '/uploadFiles'))
 // app.use(views(__dirname + '/views', {
 //   extension: 'pug'
 // }))
@@ -62,6 +63,7 @@ app.use(async (ctx, next) => {
 // app.use(index.routes(), index.allowedMethods())
 // app.use(users.routes(), users.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
+app.use(img.routes(), img.allowedMethods())
 
 
 // error-handling

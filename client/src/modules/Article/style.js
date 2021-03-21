@@ -139,6 +139,43 @@ export const RightAvatar = styled.div`
     background-position: center;
     background-size: cover;
     background-repeat: none;
+    overflow: hidden;
+    border: 1px #f8f8f8 solid;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, .4);
+    
+    /* 头像阴影层 */
+    & input{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        z-index: -1;
+    }
+
+    & .avatar-shadow {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        transition: all .3s ease;  
+        cursor: pointer;
+    }
+
+    & .avatar-shadow:hover {
+        background-color: rgba(0, 0, 0, .4);
+    }
+
+    & label div {
+        position: absolute;
+        bottom: 25px;
+        color: rgba(255, 255, 255, 0);
+        text-align: center;
+        width: 100%;
+        transition: all .3s ease;
+    }
+    & label:hover div {
+        color: rgba(255, 255, 255, .7);
+
+    }
 `
 
 export const RightContent = styled.div`

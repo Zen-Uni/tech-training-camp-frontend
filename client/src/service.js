@@ -1,6 +1,12 @@
 import fetch from './util/fetch'
 
-const rootPath = 'http://60.205.230.224:4000/api'
+// const rootPath = 'http://60.205.230.224:4000/api'
+
+export const root = "http://localhost:4000/"
+
+const rootPath = root + "api"
+
+
 const axios = fetch(rootPath)
 
 export async function login(data) {
@@ -43,3 +49,16 @@ export async function upDateArticle(payload) {
     const res = await axios('post', '/user/article-update', payload)
     return res
 }
+
+export async function getAvatar() {
+    const res = await axios('get', '/user/avatar')
+    return res
+}
+
+
+// 上传图片
+export async function upLoadImg(data) {
+    const res = await axios('post', '/img/avatar', data)
+    return res
+}
+

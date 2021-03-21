@@ -12,6 +12,9 @@ import {
 } from './style'
 
 
+// import image handle function
+import { handlePostImg } from '../../util/postImg'
+
 function Right() {
 
     const [list, setList] = useState([])
@@ -39,7 +42,13 @@ function Right() {
     return (
         <RightWrapper>
             <RightContainer>
-                <RightAvatar/>
+                <RightAvatar id="avatar" >
+                    <label htmlFor="file" className="avatar-shadow">
+                        <div className="label-tip">更换头像</div>
+                    </label>
+                    <input type="file" id="file"  onChange={handlePostImg}>
+                    </input>
+                </RightAvatar>
 
                 <RightContent>
                     {/* <RightItem>

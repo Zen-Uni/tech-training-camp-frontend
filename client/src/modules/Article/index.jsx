@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { checkToken } from '../../service'
+import { checkToken, getAvatar, root } from '../../service'
 import { updateUserConfig } from '../../store/action'
 import { configReq } from '../../util/token'
 
@@ -33,9 +33,18 @@ function Article(props) {
                 console.log(username)
                 storeUser(username)
                 setAuth(true)
+                const res = await getAvatar()
+                
+                
+                if (res.code === 0 && res.url !== "") {
+                    const avatarDiv = document.getElementById('avatar')
+                    avatarDiv.style.backgroundImage = `url(${root + res.data.url})`
+                }
             } else {
                 setAuth(false)
             }
+
+            
         }
 
         fetchData()

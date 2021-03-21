@@ -37,7 +37,7 @@ import ShareButton from './ShareButton'
 import { toolBarConfig, Tool} from '../../util/tool-bar'
 import { connect } from 'react-redux'
 import { configReq } from '../../util/token'
-import { checkToken, postArticle } from '../../service'
+import { checkToken, getAvatar, postArticle, root } from '../../service'
 import { useHistory } from 'react-router'
 
 
@@ -56,6 +56,9 @@ function Edit(props) {
                 message.warning(msg, 1, () => {
                     history.replace('/')
                 })
+            } else {
+                const res = await getAvatar()
+                document.querySelector('.avatar').style.backgroundImage = `url(${root + res.data.url})`
             }
         }
 

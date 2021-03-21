@@ -18,6 +18,7 @@ const postArticle = require('../controller/postArticle')
 const getArticle = require('../controller/getArticle')
 const getArticleDetail = require('../controller/getArticleDetail')
 const upDateArticle = require('../controller/updateArticle')
+const getAvatar = require('../controller/getAvatar')
 
 router.prefix('/api/user')
 
@@ -90,6 +91,15 @@ router.post('/article-detail', async (ctx, next) => {
 router.post('/article-update', async (ctx, next) => {
   const { id, content } = ctx.request.body
   const res = await upDateArticle({id, content})
+  ctx.body = res
+})
+
+router.get('/avatar', async (ctx, next) => {
+  const token = ctx.headers.authorization
+  const { data } = parseJWT(token)
+  const email = data.username
+  const res = await getAvatar(email)
+  console.log(res)
   ctx.body = res
 })
 
