@@ -7,6 +7,7 @@
 const ErrorInfo = require('../config/errorInfo')
 
 
+
 const {
     SuccessModel,
     ErrorModel
@@ -37,7 +38,10 @@ const {
 const checkLogin = async (token) => {
     const { code, data } = parseJWT(token)
     console.log(code)
-    if (code === -1) return new ErrorModel(ErrorInfo.notLoginInfo)
+    if (code === -1) {
+
+        return new ErrorModel(ErrorInfo.notLoginInfo)
+    }
     else if (code === 0) {
         const {
             username: email

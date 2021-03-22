@@ -4,8 +4,7 @@ import Home from './modules/Home'
 import Article from './modules/Article'
 import NotFound from './modules/NotFound'
 import Cooperation from './modules/Cooperation'
-
-
+import Admin from './modules/Admin'
  
 
 
@@ -35,6 +34,11 @@ const routes = [
         path: '/cooperation/:id',
         exact: true,
         component: Cooperation
+    },
+    {
+        path: '/admin',
+        external: true,
+        component: Admin
     },
     {
         path: '*',

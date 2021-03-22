@@ -3,6 +3,9 @@
  * @author Uni
  */
 
+// import error log
+const appendLog = require('./appendLog')
+
  class BaseModel {
     constructor(data, msg) {
         if (typeof data === 'string') {
@@ -34,6 +37,7 @@ class ErrorModel extends BaseModel {
     constructor(data, msg) {
         super(data, msg)
         this.code = 1
+        appendLog(data)
     }
 }
 
