@@ -36,7 +36,8 @@ function Article(props) {
                 const res = await getAvatar()
                 
                 
-                if (res.code === 0 && res.url !== "") {
+                if (res.code === 0 && res.data.url !== '') {
+                    console.log(res.data.url)
                     const avatarDiv = document.getElementById('avatar')
                     avatarDiv.style.backgroundImage = `url(${root + res.data.url})`
                 }

@@ -1,3 +1,11 @@
+/**
+ * @description 获取所有文章列表
+ * @author Uni
+ */
+
+// import ErrorInfo
+const ErrorInfo = require('../config/errorInfo')
+
 const {
     SuccessModel,
     ErrorModel
@@ -27,7 +35,7 @@ const getArticle = async () => {
         return new SuccessModel(res, "获取文章成功")
     } catch (err) {
         console.log(err)
-        return new ErrorModel("文章获取失败")
+        return new ErrorModel(ErrorInfo.getArticleErrorInfo)
     }
 }
 

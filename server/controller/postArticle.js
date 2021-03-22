@@ -1,3 +1,13 @@
+/**
+ * @description 发布文章
+ * @author Uni
+ */
+
+
+// import ErrorInfo
+const ErrorInfo = require('../config/errorInfo')
+
+
 const {
     SuccessModel,
     ErrorModel
@@ -30,7 +40,7 @@ const postArticle = async payload => {
         }
     } catch (err) {
         console.log(err)
-        return new ErrorModel("文章发布失败")
+        return new ErrorModel(ErrorInfo.postArticleErrorInfo)
     }
 }
 

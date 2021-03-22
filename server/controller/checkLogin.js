@@ -1,3 +1,12 @@
+/**
+ * @description 登录检测
+ * @author Uni
+ */
+
+// import ErrorInfo
+const ErrorInfo = require('../config/errorInfo')
+
+
 const {
     SuccessModel,
     ErrorModel
@@ -28,7 +37,7 @@ const {
 const checkLogin = async (token) => {
     const { code, data } = parseJWT(token)
     console.log(code)
-    if (code === -1) return new ErrorModel("尚未登录")
+    if (code === -1) return new ErrorModel(ErrorInfo.notLoginInfo)
     else if (code === 0) {
         const {
             username: email

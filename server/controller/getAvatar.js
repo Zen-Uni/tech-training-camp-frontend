@@ -1,3 +1,12 @@
+/**
+ * @description 上传头像
+ * @author Uni
+ */
+
+// import ErrorInfo
+const ErrorInfo = require('../config/errorInfo')
+
+
 const { ErrorModel, SuccessModel } = require('../config/resultModel')
 const { User } = require('../db')
 
@@ -9,7 +18,7 @@ const getAvatar = async (email) => {
             email
         }, (err, data) => {
             if (err) {
-                reject(new ErrorModel('头像更新失败'))
+                reject(new ErrorModel(ErrorInfo.upLoadAvatarErrorInfo))
             }
             resolve(new SuccessModel({
                 url: data.avatar

@@ -3,6 +3,9 @@
  * @author Uni
  */
 
+// import ErrorInfo
+const ErrorInfo = require('../config/errorInfo')
+
 // import result model and data model
 const { ErrorModel, SuccessModel } = require('../config/resultModel')
 const { 
@@ -55,7 +58,7 @@ const loginController = async (payload) => {
         const username = await getUser(payload)
         return new SuccessModel({ token, username}, "登录成功！")
     } else {
-        return new ErrorModel('用户邮箱或密码错误')
+        return new ErrorModel(ErrorInfo.loginErrorInfo)
     }
 }
 

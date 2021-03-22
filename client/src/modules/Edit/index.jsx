@@ -49,16 +49,17 @@ function Edit(props) {
         async function fetchData() {
             const {
                 code,
-                msg
+                data,
             } = await checkToken()
             // console.log(code)
             if (code === 1) {
-                message.warning(msg, 1, () => {
+                message.warning(data.msg, 1, () => {
                     history.replace('/')
                 })
             } else {
                 const res = await getAvatar()
-                document.querySelector('.avatar').style.backgroundImage = `url(${root + res.data.url})`
+                if (res.data.url !== '')
+                    document.querySelector('.avatar').style.backgroundImage = `url(${root + res.data.url})`
             }
         }
 
@@ -128,13 +129,13 @@ function Edit(props) {
             share
         }
         
-        const { code, msg } = await postArticle(payload)
+        const { code, msg, data } = await postArticle(payload)
         if (code === 0) {
             message.success(msg, .5, () => {
                 history.replace('/')
             })
         } else {
-            message.warning(msg)
+            message.warning(data.msg)
         }
     }
 

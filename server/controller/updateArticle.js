@@ -1,3 +1,11 @@
+/**
+ * @description 协同编辑，文章更新
+ * @author Uni
+ */
+
+// import ErrorInfo
+const ErrorInfo = require('../config/errorInfo')
+
 const {
     SuccessModel,
     ErrorModel
@@ -27,7 +35,7 @@ const upDateArticle = async ({id, content}) => {
         return new SuccessModel("更新成功")
     } catch (err) {
         console.log(err)
-        return new ErrorModel("更新失败")
+        return new ErrorModel(ErrorInfo.upDateArticleErrorInfo)
     }
     
 }

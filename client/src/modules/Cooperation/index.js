@@ -37,7 +37,7 @@
  import { toolBarConfig, Tool} from '../../util/tool-bar'
  import { connect } from 'react-redux'
  import { configReq } from '../../util/token'
- import { checkToken, postArticle, upDateArticle } from '../../service'
+ import { checkToken, getAvatar, postArticle, root, upDateArticle } from '../../service'
  import { useHistory, useParams } from 'react-router'
  
  
@@ -50,13 +50,18 @@
          async function fetchData() {
              const {
                  code,
-                 msg
+                 msg,
+                 data
              } = await checkToken()
              // console.log(code)
              if (code === 1) {
-                 message.warning(msg, 1, () => {
+                 message.warning(data.msg, 1, () => {
                      history.replace('/')
                  })
+             } else {
+                 const res = await getAvatar()
+                 if (res.data.url !== '')
+                    document.querySelector('.avatar').style.backgroundImage = `url(${root + res.data.url})`
              }
          }
  
@@ -117,14 +122,14 @@
              id
          }
          
-         const { code, msg } =  await upDateArticle(payload)
+         const { code, msg, data } =  await upDateArticle(payload)
          console.log(msg)
          if (code === 0) {
              message.success(msg, .5, () => {
                  history.replace('/')
              })
          } else {
-             message.warning(msg)
+             message.warning(data.msg)
          }
      }
  

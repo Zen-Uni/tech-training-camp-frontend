@@ -43,7 +43,6 @@ const Login = (props) => {
     const onFinish = async (values) => {
         const {
             code, 
-            msg, 
             data,
         } = await login(values)
         
@@ -57,7 +56,7 @@ const Login = (props) => {
            handleLogin(data.username)
            history.replace('/')
        } else {
-           message.error(msg)
+           message.error(data.msg)
        }
     };
 

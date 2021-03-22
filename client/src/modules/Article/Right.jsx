@@ -23,12 +23,12 @@ function Right() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const { code, data, msg } = await getArticle()
+            const { code, data } = await getArticle()
             if (code === 0) {
                 setList(data)
             } 
             if (code === 1) {
-                message.error(msg)
+                message.error(data.msg)
             }
         }
 

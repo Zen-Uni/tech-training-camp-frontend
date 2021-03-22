@@ -3,7 +3,8 @@
  * @author Uni
  */
 
-
+// import ErrorInfo
+const ErrorInfo = require('../config/errorInfo')
 
 // import mail service
 const mailTransport = require('../config/emailConfig')
@@ -17,6 +18,7 @@ const { User, Captcha } = require('../db')
 
 // import result model
 const { SuccessModel, ErrorModel } = require('../config/resultModel')
+
 
 const createCaptcha = () => {
     let captcha = []
@@ -117,7 +119,7 @@ const emailVerify = async (email) => {
     try {
         const emailExist = await verifyEmail(email)
         if (emailExist) {
-            return new ErrorModel('邮箱已存在！')
+            return new ErrorModel(ErrorInfo.emailExistsInfo)
         } 
 
         const captcha = createCaptcha()
@@ -125,13 +127,12 @@ const emailVerify = async (email) => {
         try {
             return await saveCaptcha(email, captcha)
         } catch (err) {
-            return new ErrorModel(err)
+            return new ErrorModel(ErrorInfo.unknowErrorInfo)
         }
 
     } catch (err) {
         console.log(err)
-        return new ErrorModel(err)
-
+        return new ErrorModel(ErrorInfo.unknowErrorInfo)
     }
     
 }

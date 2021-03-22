@@ -7,7 +7,7 @@ export const handlePostImg = async (e) => {
     console.log(auth)
     
     if (auth.code === 1) {
-        return message.warning("尚未登录")
+        return message.warning(auth.data.msg)
     }
     const files = e.target.files
     console.log(files)

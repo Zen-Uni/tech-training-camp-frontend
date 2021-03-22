@@ -34,7 +34,7 @@ function Home(props) {
                 setShare(data.share)
                 upLoadData(data.content)
             } else {
-                message.warning(msg)
+                message.warning(data.msg)
             }
         }
 

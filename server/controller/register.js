@@ -3,6 +3,9 @@
  * @author Uni
  */
 
+// import ErrorInfo
+const ErrorInfo = require('../config/errorInfo')
+
 // import result model and data model
 const { ErrorModel, SuccessModel } = require('../config/resultModel')
 const { 
@@ -80,10 +83,10 @@ const registerController = async (payload) => {
                 return new SuccessModel({ token, username }, '注册成功！')
             }
         } else {
-            return new ErrorModel('验证码错误！')
+            return new ErrorModel(ErrorInfo.captchaErrorInfo)
         }
     } catch (err) {
-        return new ErrorModel('注册失败，未知错误，请联系管理员')
+        return new ErrorModel(ErrorInfo.unknowErrorInfo)
     }
 }
 

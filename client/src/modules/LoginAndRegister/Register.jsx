@@ -37,26 +37,25 @@ const Register = (props) => {
     const [form] = Form.useForm()
 
     const onFinish = async(values) => {
-        const  { code, data, msg }= await register(values)
+        const  { code, data }= await register(values)
         if (code === 0) {
             storeToken(data.token)
             configReq()
             handleLogin(data.username)
             history.replace('/')
         } else {
-            message.error(msg)
+            message.error(data.msg)
         }
     };
 
 
     const getCaptcha = async () => {
         const email = form.getFieldValue('email')
-        const res = await captcha({email})
-        console.log(res)
-        if (res.code === 0) {
-            message.success(res.msg)
+        const { code, msg, data } = await captcha({email})
+        if (code === 0) {
+            message.success(msg)
         } else {
-            message.error(res.msg)
+            message.error(data.msg)
         }
     }
 
