@@ -11,7 +11,7 @@ function Admin() {
     useEffect(() => {
         const handleWebsocket = () => {
             let flag = 0
-            const ws = new WebSocket('ws://localhost:8080/')
+            const ws = new WebSocket('ws://60.205.230.224:8080/')
             ws.onopen = () => {
                 ws.send('open ws')
                 console.log('open ws')

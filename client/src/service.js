@@ -7,7 +7,7 @@ import fetch from './util/fetch'
 
 // const rootPath = 'http://60.205.230.224:4000/api'
 
-export const root = "http://localhost:4000/"
+export const root = "http://60.205.230.224:4000/"
 
 const rootPath = root + "api"
 
