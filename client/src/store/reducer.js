@@ -1,3 +1,8 @@
+/**
+ * @description reducer 逻辑
+ * @author Uni
+ */
+
 // import action type constant
 import {
     EDIT_UPDATE,

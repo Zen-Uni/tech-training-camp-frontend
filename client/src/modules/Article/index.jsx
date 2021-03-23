@@ -1,3 +1,8 @@
+/**
+ * @description 首页组件
+ * @author Uni
+ */
+
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { checkToken, getAvatar, root } from '../../service'

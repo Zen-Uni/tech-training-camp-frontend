@@ -1,5 +1,5 @@
 /**
- * @description markdown 编辑页面父组件，用于挂载页面布局组件
+ * @description 协作编辑页面
  * @author Uni
  */
 

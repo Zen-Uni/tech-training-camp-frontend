@@ -1,5 +1,5 @@
 /**
- * @description register page
+ * @description 注册组件
  * @author Uni
  */
 

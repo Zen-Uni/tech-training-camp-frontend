@@ -1,5 +1,5 @@
 /**
- * @description result model
+ * @description 响应模型
  * @author Uni
  */
 

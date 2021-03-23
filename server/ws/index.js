@@ -1,3 +1,8 @@
+/**
+ * @description websocket 上报错误信息
+ * @author Uni
+ */
+
 const PORT = 8080
 
 const Websocket = require("ws")

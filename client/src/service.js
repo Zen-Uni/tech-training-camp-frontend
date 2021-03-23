@@ -1,3 +1,8 @@
+/**
+ * @description 网络请求模块
+ * @author Uni
+ */
+
 import fetch from './util/fetch'
 
 // const rootPath = 'http://60.205.230.224:4000/api'

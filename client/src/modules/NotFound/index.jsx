@@ -1,3 +1,8 @@
+/**
+ * @description 404 not found page
+ * @author Uni
+ */
+
 import React from 'react'
 
 function NotFound() {

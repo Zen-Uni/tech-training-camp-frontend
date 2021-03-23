@@ -1,3 +1,7 @@
+/**
+ * @description 获取错误日志
+ * @author Uni
+ */
 const fs = require('fs')
 
 const getLog = async () => {

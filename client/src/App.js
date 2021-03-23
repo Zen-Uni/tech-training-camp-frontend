@@ -1,3 +1,7 @@
+/**
+ * @description 根组件, 用于挂载页面路由
+ * @author Uni
+ */
 import React from 'react'
 
 import { BrowserRouter as Router } from 'react-router-dom'

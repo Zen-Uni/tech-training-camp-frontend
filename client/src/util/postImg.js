@@ -1,3 +1,8 @@
+/**
+ * @description 封装头像上传方法
+ * @author Uni
+ */
+
 import { message } from "antd"
 
 import {  checkToken, upLoadImg } from "../service"

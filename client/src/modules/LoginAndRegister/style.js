@@ -1,3 +1,8 @@
+/**
+ * @description 登录注册页面样式
+ * @author Uni
+ */
+
 import styled from 'styled-components'
 
 export const SignWrappper = styled.div`

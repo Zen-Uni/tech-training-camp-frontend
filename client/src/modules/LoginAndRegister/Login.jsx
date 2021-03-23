@@ -1,5 +1,5 @@
 /**
- * @description login page
+ * @description 登录组件
  * @author Uni
  */
 

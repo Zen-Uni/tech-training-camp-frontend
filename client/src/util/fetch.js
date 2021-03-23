@@ -1,3 +1,8 @@
+/**
+ * @description 对 axios 简单的二次封装
+ * @author Uni
+ */
+
 import axios from 'axios'
 
 export default function fetch(rootPath) {

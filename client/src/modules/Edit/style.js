@@ -1,3 +1,8 @@
+/**
+ * @description 编辑页面样式
+ * @author Uni
+ */
+
 import styled from 'styled-components'
 import avatar from '../../static/avatar.jpg'
 console.log(avatar)

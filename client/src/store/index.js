@@ -1,3 +1,8 @@
+/**
+ * @description 注册 redux
+ * @author Uni
+ */
+
 import { createStore } from 'redux';
 import reducer from './reducer';
 

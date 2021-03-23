@@ -1,3 +1,8 @@
+/**
+ * @description 首页右侧组件（头像，所有文章展示）
+ * @author Uni
+ */
+
 import { message } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'

@@ -1,3 +1,8 @@
+/**
+ * @description markdown 解析逻辑，采用正则表达式
+ * @author Uni
+ */
+
 class Particle {
     constructor(text) {
         this.rules = {

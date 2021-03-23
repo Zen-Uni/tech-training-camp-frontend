@@ -1,4 +1,7 @@
-
+/**
+ * @description 快捷工具库封装
+ * @author Uni
+ */
 
 
 class Tool {

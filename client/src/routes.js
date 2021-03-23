@@ -1,3 +1,8 @@
+/**
+ * @description 采用 react-router-config 对路由进行集中管理
+ * @author Uni
+ */
+
 import Edit from './modules/Edit'
 import LoginAndRegister from './modules/LoginAndRegister'
 import Home from './modules/Home'
