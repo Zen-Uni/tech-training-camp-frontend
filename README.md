@@ -1,4 +1,4 @@
-线上地址：http://extreme.cocotea.life/
+线上地址：已废弃
 
 演示、总结视频：https://upyun.hokori.online/2021-03-17/bd_markdown.mp4
 
